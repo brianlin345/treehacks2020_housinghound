@@ -6,9 +6,7 @@ from requests_html import HTMLSession
 from bs4 import BeautifulSoup
 
 url = 'https://m.facebook.com/groups/ucberkeleyoffcampushousing'
-urln = 'https://m.facebook.com/groups/128476910881473?bac=MTU4MTc5NDgwNjo5MTgxMjMxNzE5MTY4Mzk6OTE4MTIzMTcxOTE2ODM5LDAsMDoyMDpLdz09&multi_permalinks&refid=18'
 url2 = 'https://m.facebook.com/groups/1835635240040670/'
-
 
 
 def checkReaction(text):
@@ -40,19 +38,29 @@ def findNextPage(r):
         if urlID in url:
             return url
 
+profiles = {}
+
 def scrapePage(r):
+    separator = '\\'
     curr_post = ''
     posts = []
+    last_token = ''
     for post in r.html.find('span'):
         curr_text = post.text
         if(filterSpan(curr_text)):
             if checkEnds(curr_text):
+                curr_post = curr_post.replace(last_token, '')
                 posts.append(curr_post)
+
+                curr_name = print(last_token.split(separator))
+                profiles[curr_name] = ''
+
                 curr_post = ''
             curr_post += curr_text
+            last_token = curr_text
     return posts
 
-def scraperMain(start_url, pages = 2):
+def scraperMain(start_url, pages = 1):
     session = HTMLSession()
     posts = []
     for search in range(pages):
@@ -62,4 +70,5 @@ def scraperMain(start_url, pages = 2):
         start_url = findNextPage(req)
     return posts
 
-print(scraperMain(url))
+print(scraperMain(url2))
+print(profiles)
