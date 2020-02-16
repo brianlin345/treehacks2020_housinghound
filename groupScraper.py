@@ -134,6 +134,7 @@ class Housing:
     def __str__(self):
         return "Author: {}, Beds {}, Bathrooms {}, Price {}, Rank {}".format(self.author, self.bedrooms, self.bathrooms, self.price, self.rank)
 
+
     def setPrefs(self, bedrooms, bathrooms, price):
         Housing.bedrooms_pref = bedrooms
         Housing.bathrooms_pref = bathrooms
@@ -183,18 +184,22 @@ class Housing:
 def sortHousing(h_list):
     return sorted(h_list, key= lambda x: (x.getRank(), -x.getPrice()), reverse = True)
 
-def groupScraperMain(url):
+def groupScraperMain(url, bedrooms_pref, bathrooms_pref, price_max):
     housing_list = parsePosts(url)
-    housing_list[0].setPrefs(2, 1, 1500)
+    housing_list[0].setPrefs(bedrooms_pref, bathrooms_pref, price_max)
     housing_list = sortHousing(housing_list)
     return housing_list
 
+
 app = Flask(__name__)
 url = url1
+bedrooms_pref = 0
+bathrooms_pref = 0
+price_max = 0
 
 @app.route('/')
 def a():
-    housing_list = groupScraperMain(url)
+    housing_list = groupScraperMain(url, bedrooms_pref, bathrooms_pref, price_max)
     housing_list = sortHousing(housing_list)
     for h in housing_list:
         print(h)
@@ -210,9 +215,8 @@ def about():
 
 @app.route('/about', methods = ['POST'])
 def get_method():
-    text = request.form['text']
-    global url
-    url = text
+    global url, bedrooms_pref, bathrooms_pref, price_max
+    url, bedrooms_pref, bathrooms_pref, price_max = request.form['group_text'], request.form['bedroom_text'], request.form['bathroom_text'], request.form['price_text']
     return redirect('/')
 
 
