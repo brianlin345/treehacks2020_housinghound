@@ -19,31 +19,9 @@
 
 
       <link href='https://fonts.googleapis.com/css?family=Lora:400,400italic|Work+Sans:300,400,500,600' rel='stylesheet' type='text/css'>
-      <!-- <link href="static/css/toolkit-startup.css" rel="stylesheet">
-      <link href="static/css/application-startup.css" rel="stylesheet"> -->
 
       <link href="{{url_for('static', filename = 'css/application-startup.css')}}" rel="stylesheet">
       <link href="{{url_for('static', filename = 'css/toolkit-startup.css')}}" rel="stylesheet">
-
-
-    <!-- <style>
-      /* note: this is a hack for ios iframe for bootstrap themes shopify page */
-      /* this chunk of css is not part of the toolkit :) */
-      /* …curses ios, etc… */
-      @media (max-width: 768px) and (-webkit-min-device-pixel-ratio: 2) {
-        body {
-          width: 1px;
-          min-width: 100%;
-          *width: 100%;
-        }
-        #stage {
-          height: 1px;
-          overflow: auto;
-          min-height: 100vh;
-          -webkit-overflow-scrolling: touch;
-        }
-      }
-    </style> -->
   </head>
 
 
@@ -128,21 +106,21 @@
     <div class="row app-align-center">
 
       <div class="col-sm-5 hidden-sm-down">
-        <img class="app-iphone" src="static/img/startup-2.jpg" style="width: 100%;">
+        <img class="app-iphone" src="static/img/data.png" style="width: 100%;">
       </div>
 
       <div class="col-md-6 offset-md-1 col-sm-12 offset-sm-0">
         <h6 class="text-muted text-uppercase">Rich Information</h6>
-        <h3>Make informed decisions with historical &amp; real time data.</h3>
-        <p class="lead mb-4">We combine immediate real time events with rich historical data to help answer the toughest questions about retention, growth, and engagement.</p>
+        <h3>Make informed decisions with real time data.</h3>
+        <p class="lead mb-4">We utilize immediate real time events to help answer the toughest questions about housing rates.</p>
         <div class="row hidden-md-down">
           <div class="col-sm-6 mb-3">
             <h5>Data frequency</h5>
-            <p>We poll for data on a millisecond basis. You can react to new information in seconds rather than days. <a href="#" class="text-primary">Learn more.</a></p>
+            <p>We poll for data on a millisecond basis. You can react to new information in seconds rather than days.</p>
           </div>
           <div class="col-sm-6">
             <h5>Reliability &amp; uptime</h5>
-            <p>We process our data across a massively distributed network of reliable servers to ensure 99.99% uptime, always. <a href="#" class="text-primary">Learn more</a>.</p>
+            <p>We process our data across a massively distributed network of reliable servers to ensure 99.99% uptime, always.</p>
           </div>
         </div>
       </div>
@@ -176,15 +154,15 @@
 
       <div class="col-md-6 pull-md-5">
         <h6 class="text-muted text-uppercase">Easy development</h6>
-        <h3>We do all the mining, secure housing with perfect timing.</h3>
-        <p class="lead mb-4 text-muted">Rather than force everyone at your company to learn incredibly difficult terminal commands, we allow anyone to query the data with natural language to return data.</p>
+        <h3>We do all the mining. Secure housing with perfect timing.</h3>
+        <p class="lead mb-4 text-muted">Rather than waste time searching for data manually, we query the data with natural language.</p>
       </div>
     </div>
   </div>
 </div>
 
 <div class="block block-inverse app-high-praise"
-     style="background-image: url(static/img/adam_dark.jpg);">
+     style="background-image: url(static/img/adam_dark.jpg); background-position: center;">
     <div class="container">
       <div class="row app-align-center py-3">
         <div class="col-sm-5 push-sm-7 py-5">
@@ -219,57 +197,15 @@
     <div class="row app-marketing-grid">
       <div class="col-md-4 px-4 mb-5">
         <img class="mb-1" src="static/img/startup-9.svg">
-        <p><strong>Transparency</strong> Escape all the bad formatting on Facebook.</p>
+        <p><strong>Clarity</strong><br> Escape all the bad formatting on Facebook.</p>
       </div>
       <div class="col-md-4 px-4 mb-5">
         <img class="mb-1" src="static/img/startup-12.svg">
-        <p><strong>Easy Compare</strong> Filter based on your preferences.</p>
+        <p><strong>Easy Compare</strong><br> Filter based on your preferences.</p>
       </div>
       <div class="col-md-4 px-4 mb-5">
         <img class="mb-1" src="static/img/startup-11.svg">
-        <p><strong>Save Time</strong> Say good bye to endless scrolling, find a place in seconds!</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="block block-inverse app-footer">
- <div class="container">
-    <div class="row">
-      <div class="col-md-5 mb-5">
-        <ul class="list-unstyled list-spaced">
-          <li class="mb-2"><h6 class="text-uppercase">About</h6></li>
-          <li class="text-muted">
-             We’ve been working on Go Analytics for the better part of a decade and are super proud of what we’ve created. If you’d like to learn more, or are interested in a job, contact us anytime at <a href="mailto: themes@getbootstrap.com">themes@getbootstrap.com</a>.
-          </li>
-        </ul>
-      </div>
-      <div class="col-md-2 offset-md-1 mb-5">
-        <ul class="list-unstyled list-spaced">
-          <li class="mb-2"><h6 class="text-uppercase">Product</h6></li>
-          <li class="text-muted">Features</li>
-          <li class="text-muted">Examples</li>
-          <li class="text-muted">Tour</li>
-          <li class="text-muted">Gallery</li>
-        </ul>
-      </div>
-      <div class="col-md-2 mb-5">
-        <ul class="list-unstyled list-spaced">
-          <li class="mb-2"><h6 class="text-uppercase">Apis</h6></li>
-          <li class="text-muted">Rich data</li>
-          <li class="text-muted">Simple data</li>
-          <li class="text-muted">Real time</li>
-          <li class="text-muted">Social</li>
-        </ul>
-      </div>
-      <div class="col-md-2 mb-5">
-        <ul class="list-unstyled list-spaced">
-          <li class="mb-2"><h6 class="text-uppercase">Legal</h6></li>
-          <li class="text-muted">Terms</li>
-          <li class="text-muted">Legal</li>
-          <li class="text-muted">Privacy</li>
-          <li class="text-muted">License</li>
-        </ul>
+        <p><strong>Save Time</strong><br> Say good bye to endless scrolling, find a place in seconds!</p>
       </div>
     </div>
   </div>
@@ -283,9 +219,6 @@
     <script type = "text/javascript" src="{{url_for('static', filename = 'js/tether.min.js')}}"></script>
     <script type = "text/javascript" src="{{url_for('static', filename = 'js/toolkit.js')}}"></script>
     <script type = "text/javascript" src="{{url_for('static', filename = 'js/application.js')}}"></script>
-<!--
-    <script src="static/js/tether.min.js"></script>
-    <script src="static/js/toolkit.js"></script>
-    <script src="static/js/application.js"></script> -->
+
   </body>
 </html>
