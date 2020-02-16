@@ -1,0 +1,27 @@
+
+
+
+
+
+
+.wrapper {
+    display: grid;
+    height: 90vh;
+    margin: 14px 50px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr ;
+    grid-gap: 30px;
+    justify-content: center;
+    background-color: #fff;
+    color: #fff;
+    padding: 1.3em;
+
+  }
+  
+  .box {
+    background-color: #28669F;
+    color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 150%;
+  }
