@@ -35,6 +35,7 @@ def findGroupName(r):
 
 def scrapePage(r, posts):
     session = HTMLSession()
+    global group_name
     group_name = findGroupName(r)
     post_class = '.story_body_container'
     for post in r.html.find(post_class):
@@ -196,6 +197,7 @@ url = url1
 bedrooms_pref = 0
 bathrooms_pref = 0
 price_max = 0
+group_name = ''
 
 @app.route('/')
 def a():
@@ -207,7 +209,8 @@ def a():
     return render_template('main.html', housing_list = housing_master,
                             bedrooms = Housing.bedrooms_pref,
                             bathrooms = Housing.bathrooms_pref,
-                            price = Housing.price_max)
+                            price = Housing.price_max,
+                            group_name = group_name)
 
 @app.route('/about')
 def about():
