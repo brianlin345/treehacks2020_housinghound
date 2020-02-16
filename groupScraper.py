@@ -22,7 +22,7 @@ def filterPost(text):
 def findNextPage(r):
     urlClassOuter = '.touchable'
     urlClassInner = '.primary'
-    #group_name = r.html.find(urlClassOuter)
+    group_name = r.html.find(urlClassOuter)
     group_name = r.html.find(urlClassInner, first = True)
     print(group_name.links)
     return urlheader + group_name.links.pop()
