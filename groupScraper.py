@@ -113,7 +113,6 @@ def parsePosts(url):
                                     post_info['bathrooms'],
                                     post_info['price'], author)
                     housing_list.append(curr_housing)
-                    print(curr_housing)
                     break
     return housing_list
 
@@ -126,11 +125,11 @@ class Housing:
         self.bedrooms = bedrooms
         self.bathrooms = bathrooms
         self.price = re.sub('\D', '', price)
-        self.rank = 3
+        self.setRank()
         self.author = author
 
     def __str__(self):
-        return "Author: {}, Beds {}, Bathrooms {}, Price {}".format(self.author, self.bedrooms, self.bathrooms, self.price)
+        return "Author: {}, Beds {}, Bathrooms {}, Price {}, Rank {}".format(self.author, self.bedrooms, self.bathrooms, self.price, self.rank)
 
     def setPrefs(self, bedrooms, bathrooms, price):
         bedrooms_pref = bedrooms
@@ -138,17 +137,32 @@ class Housing:
         price_max = price
 
     def setRank(self):
+        self.rank = 3
         if len(self.bedrooms) > 0 and int(self.bedrooms) == self.bedrooms_pref:
             self.rank += 1
         if len(self.bathrooms) > 0 and int(self.bathrooms) == self.bathrooms_pref:
             self.rank += 1
-        if len(self._price) > 0 and int(self.price_max) <= self.price_max:
+        if len(self.price) > 0 and int(self.price_max) <= self.price_max:
             self.rank += 1
 
     def getRank(self):
         return self.rank
 
+    def getPrice(self):
+        if len(self.price) == 0:
+            return float('inf')
+        else:
+            return int(self.price)
 
 
+def sortHousing(h_list):
+    return sorted(h_list, key= lambda x: (x.getRank(), x.getPrice()), reverse = True)
 
-parsePosts(url1)
+def groupScraperMain():
+    housing_list = parsePosts(url1)
+    housing_list[0].setPrefs(2, 1, 1500)
+    housing_list = sortHousing(housing_list)
+    for h in housing_list:
+        print(h)
+
+groupScraperMain()
