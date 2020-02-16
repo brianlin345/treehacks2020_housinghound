@@ -1,7 +1,10 @@
 import requests
 from word2number import w2n
 import re
+import json
 from requests_html import HTMLSession
+from flask import Flask, render_template, request, redirect
+
 
 
 url1 = 'https://m.facebook.com/groups/ucberkeleyoffcampushousing'
@@ -132,9 +135,9 @@ class Housing:
         return "Author: {}, Beds {}, Bathrooms {}, Price {}, Rank {}".format(self.author, self.bedrooms, self.bathrooms, self.price, self.rank)
 
     def setPrefs(self, bedrooms, bathrooms, price):
-        bedrooms_pref = bedrooms
-        bathrooms_pref = bathrooms
-        price_max = price
+        Housing.bedrooms_pref = bedrooms
+        Housing.bathrooms_pref = bathrooms
+        Housing.price_max = price
 
     def setRank(self):
         self.rank = 3
@@ -154,30 +157,64 @@ class Housing:
         else:
             return int(self.price)
 
+    def getBedrooms(self):
+        if len(self.bedrooms) == 0:
+            return "N/A"
+        else:
+            return self.bedrooms
+
+    def getBathrooms(self):
+        if len(self.bathrooms) == 0:
+            return "N/A"
+        else:
+            return self.bathrooms
+
+    def getPriceStr(self):
+        if len(self.price) == 0:
+            return "N/A"
+        else:
+            return int(self.price)
+
+    def serialize(self):
+        return [self.author, self.getBedrooms(), self.getBathrooms(), self.getPriceStr(),
+        self.rank]
+
 
 def sortHousing(h_list):
-    return sorted(h_list, key= lambda x: (x.getRank(), x.getPrice()), reverse = True)
+    return sorted(h_list, key= lambda x: (x.getRank(), -x.getPrice()), reverse = True)
 
-def groupScraperMain():
-    housing_list = parsePosts(url1)
+def groupScraperMain(url):
+    housing_list = parsePosts(url)
     housing_list[0].setPrefs(2, 1, 1500)
+    housing_list = sortHousing(housing_list)
+    return housing_list
+
+app = Flask(__name__)
+url = url1
+
+@app.route('/')
+def a():
+    housing_list = groupScraperMain(url)
     housing_list = sortHousing(housing_list)
     for h in housing_list:
         print(h)
-
-groupScraperMain()
-
-
-from flask import Flask, render_template
-
-app = Flask(__name__)
-@app.route('/')
-def index():
-    return render_template('home.html ')
+    housing_master = [h.serialize() for h in housing_list]
+    return render_template('main.html', housing_list = housing_master,
+                            bedrooms = Housing.bedrooms_pref,
+                            bathrooms = Housing.bathrooms_pref,
+                            price = Housing.price_max)
 
 @app.route('/about')
-def index():
-    return render_template('about.html ')
+def about():
+    return render_template('about.html')
+
+@app.route('/about', methods = ['POST'])
+def get_method():
+    text = request.form['text']
+    global url
+    url = text
+    return redirect('/')
+
 
 if __name__ == '__main__':
     app.run(debug = True)
